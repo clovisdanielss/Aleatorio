@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
         <link rel="stylesheet" href="./css/main.css" crossorigin="anonymous">
         <script type="text/javascript" src="./js/lateral-menu.js"></script>
+        <script type="text/javascript" src="./js/user-table.js"></script>
         <title>Inicio</title>
     </head>
     <body>
@@ -27,7 +28,7 @@
                         <a onclick="openNav()" class="nav-link" href="#"><i class="fas fa-user-plus"></i> Cadastrar</a>
                     </li>
                     <li>
-                        <a onclick="openNav()" class="nav-link" href="#"><i class="fas fa-edit"></i> Editar</a>
+                        <a onclick="openNav()" class="nav-link dropdown" href="#"><i class="fas fa-edit"></i> Editar</a>
                     </li>
                     <li>
                         <a onclick="openNav()" class="nav-link" href="#"><i class="fas fa-check-square"></i> Permissões</a>
@@ -59,17 +60,16 @@
                 </div>
             </div>
             <div id="main-content" class="content-block" onclick="closeNav()">
-                <div id="" class="card col-md-6 offset-md-3">
-                    <label style="padding-left: 8px;padding-top: 8px;" for="inputNome">Nome</label>
-                    <form class="form-row block">
-                        <div class="form-group col-sm-11">
-                            <input type="text" id="inputNome" class="form-control" placeholder="Ex.: Fulano de Tal" />               
-                        </div>
-                        <div class="">
-                            <button class="btn btn-primary">Filtrar</button>
-                        </div>
-                    </form>
-                    <div class="list-group">
+                <div id="" class="card col-md-6 offset-md-3" style="">
+                    <div class="row card-header" style="justify-content:end;">
+                        <form class="form-inline col-auto" >
+                            <div class="form-group">
+                                <input type="text" id="inputNome" class="form-control" placeholder="Ex.: Fulano de Tal" />
+                                <button class="btn btn-primary">Filtrar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="list-group card-body">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -81,21 +81,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="list-group-item-action">
+                                <tr id="1" class="list-group-item list-group-item-action">
                                     <th scope="row">1</th>
                                     <td>Mark Otto</td>
                                     <td>999.999.999-01</td>
                                     <td>2000000000001</td>
                                     <td>Cosmetics LTDA.</td>
                                 </tr>
-                                <tr class="list-group-item-action">
+                                <tr id="2" class="list-group-item list-group-item-action">
                                     <th scope="row">2</th>
                                     <td>Jacob Thornton</td>
                                     <td>999.999.999-02</td>
                                     <td>2000000000002</td>
                                     <td>Cosmetics LTDA.</td>
                                 </tr>
-                                <tr class="list-group-item-action">
+                                <tr id="3" class="list-group-item list-group-item-action">
                                     <th scope="row">3</th>
                                     <td>Larry the Bird</td>
                                     <td>999.999.999-03</td>
@@ -110,4 +110,31 @@
         </div>
     </body>
 </html>
-
+<!--MODAL-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Selecione ...</button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">CherryTrack</a>
+            <a class="dropdown-item" href="#">SisRot</a>
+         </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card card-body" id="ops" style="display:none;">
+         <ul class="list-group">
+          <a class="mymodal list-group-item-action list-group-item">Motorista</a>
+          <a class="mymodal list-group-item-action list-group-item">Fiscal</a>
+          <a class="mymodal list-group-item-action list-group-item">Gerente</a>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
