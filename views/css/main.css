@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+nav{
+	font-family: 'Roboto', sans-serif;
+}
+
+
+.logo{
+	max-width: 70%;  
+	height: auto;
+}
+
+
+#main-content{
+	transition:0.5s;
+	padding-top:6.5%;
+}
+#float-panel{
+	display: flex;
+  flex-direction:;
+	flex-wrap:wrap;
+  justify-content: center;
+	vertical-align:middle;
+}
+
+.navbar-light .navbar-nav .nav-link{
+	color:c8c8c8;
+}
+
+.bg-gray{
+	background-color:gray;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    background-color: rgb(250,250,250);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+#content-master{
+	display:flex;
+}
+
+.count{
+	font-size:30px;
+}
+.block{
+	padding: 8px 8px 8px 8px;
+}
+
+.border-debbuger{
+	border: 1px solid black;
+}
+.no-padding{
+	padding: 0px 0px 0px 0px!important;
+}
+
+.row-body{
+	margin-top:5%;
+	margin-bottom:5%;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px;
+    text-decoration: none;
+    color: gray;
+    display: block;
+    transition: 0.3s;
+}
+.content-block{
+	height:100%;
+	position: fixed;
+  left: 0;
+	width:100%;
+	background-color: rgb(156, 192, 237);
+  background: url('http://i.imgur.com/r8RbW.jpg') no-repeat center center fixed;
+}
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+#wrapper {
+  position: relative;
+  margin: auto;
+}
+#meter {
+  width: 100%; height: 100%;
+  transform: rotateX(180deg);
+}
+.circle {
+  fill: none;
+}
+.outline, #mask,#mask2,#mask3 {
+  stroke: #F1F1F1;
+  stroke-width: 65;
+}
+.range {
+  stroke-width: 60;
+}
+#count-empresas, #lbl,#count-sistemas,#count-usuarios {
+  position: absolute;
+}
+#count-empresas,#count-sistemas,#count-usuarios {
+  cursor: pointer;
+  left: 0;
+  margin: auto;
+  right: 0;
+  top: 58%;
+  width: 94%;
+}
+#lbl {
+  background-color: #4B4C51;
+  border-radius: 2px;
+  color: white;
+  font-family: 'courier new';
+  font-size: 15pt;
+  font-weight: bold;
+  padding: 4px 4px 2px 4px;
+  right: -48px;
+  top: 57%;
+}
+#meter_needle {
+  height: 40%;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 10%;
+  transform-origin: bottom center;
+  /*orientation fix*/
+  transform: rotate(270deg);
+}
+#meter_needle3 {
+  height: 40%;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 10%;
+  transform-origin: bottom center;
+  /*orientation fix*/
+  transform: rotate(270deg);
+}
+#meter_needle2 {
+  height: 40%;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 10%;
+  transform-origin: bottom center;
+  /*orientation fix*/
+  transform: rotate(270deg);
+}

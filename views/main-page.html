@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" href="./css/main.css" crossorigin="anonymous">
+	<script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript" src="./js/lateral-menu.js"></script>
+
+	<title>Inicio</title>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img class="img-fluid logo" src="http://www.graphvs.com.br/sitegraphvs/wp-content/themes/graphvs/images/logo_graphvs.png" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li>
+                <a onclick="openNav()" class="nav-link" href="#"><i class="fas fa-user-plus"></i> Cadastrar</a>
+            </li>
+            <li>
+                <a onclick="openNav()" class="nav-link" href="#"><i class="fas fa-edit"></i> Editar</a>
+            </li>
+            <li>
+                <a onclick="openNav()" class="nav-link" href="#"><i class="fas fa-check-square"></i> Permissões</a>
+            </li>
+            <li>
+                <a onclick="openNav();" class="nav-link" href="#"><i class="fas fa-chart-bar"></i> Relatórios</a>
+            </li>
+            <li>
+                <a onclick="closeNav()" class="nav-link" href="#"><i class="fas fa-envelope"></i> Contato</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-right">
+            <li>
+                <a class="nav-link" href="./login-page.html"><i class="fas fa-sign-out-alt"></i> Sair</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="col-sm-3">
+        <div id="mySidenav" class="sidenav text-center">
+            <div>
+                <hr>
+                <a href="#">Usuários</a>
+                <hr>
+                <a href="#">Empresas</a>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div id="main-content" class="content-block" onclick="closeNav()">
+        <div id="float-panel" class="row card no-padding text-center col-md-6 offset-md-3">
+            <div class="card-header col-md-12">
+                <h1>Resumo</h1>
+            </div>
+            <div class="card-group">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Empresas</h5>
+                        <div id="wrapper">
+                            <svg id="meter">
+                                <circle id="outline_curves" class="circle outline" cx="50%" cy="50%"></circle>
+
+                                <circle id="low" class="circle range" cx="50%" cy="50%" stroke="#54d858"></circle>
+
+                                <circle id="avg" class="circle range" cx="50%" cy="50%" stroke="#FDE47F"></circle>
+
+                                <circle id="high" class="circle range" cx="50%" cy="50%" stroke="#E04644"></circle>
+
+                                <circle id="mask" class="circle" cx="50%" cy="50%">
+                                </circle>
+
+                                <circle id="outline_ends" class="circle outline" cx="50%" cy="50%"></circle>
+                            </svg>
+                            <img id="meter_needle" src="https://hongkiat.github.io/svg-meter-gauge/svg-meter-gauge-needle.svg" alt="">
+
+                            <h5 value="0" id="count-empresas" class="count">4000</h5>
+                        </div>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Usuários</h5>
+                        <div id="wrapper">
+                            <svg id="meter">
+                                <circle id="outline_curves2" class="circle outline" cx="50%" cy="50%"></circle>
+
+                                <circle id="low2" class="circle range" cx="50%" cy="50%" stroke="#54d858"></circle>
+
+                                <circle id="avg2" class="circle range" cx="50%" cy="50%" stroke="#FDE47F"></circle>
+
+                                <circle id="high2" class="circle range" cx="50%" cy="50%" stroke="#E04644"></circle>
+
+                                <circle id="mask2" class="circle" cx="50%" cy="50%">
+                                </circle>
+
+                                <circle id="outline_ends2" class="circle outline" cx="50%" cy="50%"></circle>
+                            </svg>
+                            <img id="meter_needle2" src="https://hongkiat.github.io/svg-meter-gauge/svg-meter-gauge-needle.svg" alt="">
+
+                            <h5 value="0" id="count-usuarios" class="count">4000</h5>
+                        </div>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Sistemas</h5>
+                        <div id="wrapper">
+                            <svg id="meter">
+                                <circle id="outline_curves3" class="circle outline" cx="50%" cy="50%"></circle>
+
+                                <circle id="low3" class="circle range" cx="50%" cy="50%" stroke="#54d858"></circle>
+
+                                <circle id="avg3" class="circle range" cx="50%" cy="50%" stroke="#FDE47F"></circle>
+
+                                <circle id="high3" class="circle range" cx="50%" cy="50%" stroke="#E04644"></circle>
+
+                                <circle id="mask3" class="circle" cx="50%" cy="50%">
+                                </circle>
+
+                                <circle id="outline_ends3" class="circle outline" cx="50%" cy="50%"></circle>
+                            </svg>
+                            <img id="meter_needle3" src="https://hongkiat.github.io/svg-meter-gauge/svg-meter-gauge-needle.svg" alt="">
+
+                            <h5 value="0" id="count-sistemas" class="count">4273</h5>
+                        </div>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
