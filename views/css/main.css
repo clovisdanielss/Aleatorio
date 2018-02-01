@@ -12,6 +12,14 @@ nav{
 	height: auto;
 }
 
+.mymodal.fas.fa-check{
+	transition: 0.5s!important;
+	margin-left: 65%!important;
+}
+
+.mymodal.list-group-item-action.list-group-item{
+	border: 1px solid #dbdcd9!important;
+}
 
 #main-content{
 	transition:0.5s;
