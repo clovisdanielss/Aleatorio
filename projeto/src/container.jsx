@@ -1,5 +1,5 @@
 import React from 'react';
-import Macacada from './macacada.jsx';
+import Macacada from './velocimeterAnimation.jsx';
 
 const noPadding = {padding: "0"};
 
@@ -22,6 +22,7 @@ export default class Container extends React.Component{
         );
     }
 }
+const noHeight = {height:"0"};
 
 const Velocimeter = (props) => (
     <div className = "card">
