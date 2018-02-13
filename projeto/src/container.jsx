@@ -4,6 +4,10 @@ import Macacada from './velocimeterAnimation.jsx';
 const noPadding = {padding: "0"};
 
 export default class Container extends React.Component{
+    constructor(){
+        super();
+        Macacada();
+    }
     render(){
         return(
             <div className = "container-fluid">

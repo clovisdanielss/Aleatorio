@@ -1,5 +1,5 @@
 module.exports = {
-    entry:'./src/login.jsx',
+    entry:'./src/app.jsx',
     output:{
         path: __dirname + '/static',
         filename:'app.js',

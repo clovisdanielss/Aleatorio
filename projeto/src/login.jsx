@@ -1,14 +1,13 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
 import {Grid, Col, Row} from 'react-bootstrap';
 import {Card, CardHeader, CardBody, Form, FormGroup, Label, Input, Button} from 'reactstrap';
 
 //As classes devem ser do bootstrap 4. (Não possui tags para Grid,Col,Row)
 //As tags(Grid,Col,Row) são do bootstrap 3.
 
-const contentNode = document.getElementById('content');
 
-class Login extends React.Component{
+
+export default class Login extends React.Component{
     render(){
         return(
             <Grid style={{marginTop:"12.5%"}}>
@@ -42,5 +41,3 @@ class Login extends React.Component{
         );
     }
 }
-
-ReactDOM.render(<Login/>, contentNode);

@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import jQuery from 'jquery';
-window.onload = function(){
+module.exports = function() {
     /* Set radius for all circles */
     var r = 35;
     var circles = document.querySelectorAll('.circle');
