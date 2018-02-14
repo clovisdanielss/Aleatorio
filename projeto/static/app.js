@@ -33286,6 +33286,10 @@ var _velocimeterAnimation = __webpack_require__(170);
 
 var _velocimeterAnimation2 = _interopRequireDefault(_velocimeterAnimation);
 
+var _reactBootstrap = __webpack_require__(217);
+
+var _reactstrap = __webpack_require__(103);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33295,6 +33299,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var noPadding = { padding: "0" };
+var topMargin = { marginTop: "50px" };
 
 var Container = function (_React$Component) {
     _inherits(Container, _React$Component);
@@ -33314,19 +33319,19 @@ var Container = function (_React$Component) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'div',
-                { className: 'container-fluid' },
+                _reactBootstrap.Col,
+                { lg: 6, className: ' offset-lg-3 ', style: topMargin },
                 _react2.default.createElement(
-                    'div',
-                    { className: 'card text-center col-sm-8 offset-sm-2', style: noPadding },
+                    _reactstrap.Card,
+                    { className: 'text-center' },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'card-header' },
+                        _reactstrap.CardHeader,
+                        null,
                         'Resumo'
                     ),
                     _react2.default.createElement(
-                        'div',
-                        { className: 'card-group' },
+                        _reactstrap.CardGroup,
+                        null,
                         _react2.default.createElement(Velocimeter, { title: 'Empresas', index: '', lowerCaseTitle: 'empresas', value: '1000' }),
                         _react2.default.createElement(Velocimeter, { title: 'Usuarios', index: '2', lowerCaseTitle: 'usuarios', value: '3000' }),
                         _react2.default.createElement(Velocimeter, { title: 'Sistemas', index: '3', lowerCaseTitle: 'sistemas', value: '5000' })
@@ -33342,14 +33347,13 @@ var Container = function (_React$Component) {
 exports.default = Container;
 
 var noHeight = { height: "0" };
-
 var Velocimeter = function Velocimeter(props) {
     return _react2.default.createElement(
-        'div',
-        { className: 'card' },
+        _reactstrap.Card,
+        null,
         _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
+            _reactstrap.CardBody,
+            null,
             _react2.default.createElement(
                 'h5',
                 { className: 'card-title' },
