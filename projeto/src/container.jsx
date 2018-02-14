@@ -1,12 +1,11 @@
 import React from 'react';
-import Macacada from './velocimeterAnimation.jsx';
+import Animation from './velocimeterAnimation.jsx';
 
 const noPadding = {padding: "0"};
 
 export default class Container extends React.Component{
-    constructor(){
-        super();
-        Macacada();
+    componentDidMount(){
+        Animation();
     }
     render(){
         return(
@@ -21,7 +20,6 @@ export default class Container extends React.Component{
                         <Velocimeter title = "Sistemas" index = "3" lowerCaseTitle = "sistemas" value="5000"/>
                     </div>
                 </div>
-                
             </div>
         );
     }

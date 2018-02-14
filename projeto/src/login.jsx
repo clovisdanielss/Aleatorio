@@ -1,6 +1,7 @@
 import React from 'react'
 import {Grid, Col, Row} from 'react-bootstrap';
 import {Card, CardHeader, CardBody, Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import {Redirect} from 'react-router-dom';
 
 //As classes devem ser do bootstrap 4. (Não possui tags para Grid,Col,Row)
 //As tags(Grid,Col,Row) são do bootstrap 3.
@@ -8,7 +9,19 @@ import {Card, CardHeader, CardBody, Form, FormGroup, Label, Input, Button} from 
 
 
 export default class Login extends React.Component{
+    constructor(){
+        super();
+        this.state={isAuth:false}
+        this.login = this.login.bind(this);
+    }
+    login(){
+        this.setState({isAuth:true});
+    }
     render(){
+        const {isAuth} = this.state;
+        if(isAuth){
+            return <Redirect to='/main'/>
+        }
         return(
             <Grid style={{marginTop:"12.5%"}}>
                 <Row>
@@ -29,7 +42,9 @@ export default class Login extends React.Component{
                                     </FormGroup>
                                     <Row>
                                         <Col sm={4} className="offset-sm-4 offset-4">
-                                            <Button color="primary">Entrar</Button>
+                                            <Button onClick={this.login} color="primary">
+                                               Entrar
+                                            </Button>
                                         </Col>
                                     </Row>
                                 </Form>

@@ -1,12 +1,12 @@
 import React from 'react'
 import Container from './container.jsx';
-import Navbar from './navbar.jsx';
+import TopMenu from './topMenu.jsx';
 
 export default class Page extends React.Component{
     render(){
         return(
             <div>
-                <Navbar/>
+                <TopMenu/>
                 <Container/>
             </div>
         );
