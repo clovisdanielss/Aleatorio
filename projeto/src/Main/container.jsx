@@ -9,6 +9,7 @@ const topMargin = {marginTop:"50px"};
 export default class Container extends React.Component{
     componentDidMount(){
         Animation();
+
     }
     
     render(){

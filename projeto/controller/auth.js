@@ -5,6 +5,7 @@ var passport = require("passport");
 var passportJWT = require("passport-jwt");
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
+mongoose.connect(config.database);
 
 var params = {};
 params.secretOrKey = config.secret;
@@ -13,7 +14,7 @@ params.jwtFromRequest= ExtractJwt.fromAuthHeaderAsBearerToken();
 
 module.exports = function() {
     var strategy = new  JwtStrategy(params, function(jwt_payload, done) {
-        userModel.findOne({id: jwt_payload.id}, function(err, user) {
+        userModel.findById(jwt_payload.id, function(err, user) {
             if (err) {
                 return done(err, false);
             }

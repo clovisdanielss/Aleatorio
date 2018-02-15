@@ -33,6 +33,7 @@ export default class Login extends React.Component{
             if(data.message === 'ok'){
                 $this.setState({isAuth:true});
                 //localStorage soh usa o contexto da aba atual.
+                
                 localStorage.setItem('token',data.token);
             }
         }).catch(err=>{
@@ -45,7 +46,7 @@ export default class Login extends React.Component{
             return <Redirect to='/main'/>
         }
         return(
-            <Grid style={{marginTop:"12.5%"}}>
+            <Grid style={{marginTop:"8.5%"}}>
                 <Row>
                     <Col lg={6} md={8} sm={10} className="offset-lg-3 offset-md-2 offset-sm-1">
                         <Card>

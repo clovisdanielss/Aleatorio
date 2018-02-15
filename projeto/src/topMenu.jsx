@@ -1,14 +1,15 @@
 import React from 'react';
 import {Icon} from 'react-font-awesome-5';
 import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {Link} from 'react-router-dom';
 
 const NavbarItens = (props) => (
     <Collapse isOpen={props.isOpen} navbar>
         <Nav className="navbar-nav" navbar>
             <NavItem>
-                <NavLink>
+                <Link className="nav-link" to='/userCreate'>
                     <Icon.UserPlus/> Cadastrar
-                </NavLink>
+                </Link>
             </NavItem>
             <NavItem>
                 <NavLink>
@@ -16,9 +17,9 @@ const NavbarItens = (props) => (
                 </NavLink>
             </NavItem>
             <NavItem>
-                <NavLink>
+                <Link className="nav-link" to='/userTable'>
                     <Icon.CheckSquare/> Permissões
-                </NavLink>
+                </Link>
             </NavItem>
             <NavItem>
                 <NavLink>
