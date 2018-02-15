@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
 
-
 var UserSchema = new Schema({
     username:{
         type: String,
@@ -19,7 +18,8 @@ var UserSchema = new Schema({
     nivel:{
         type: String,
         required: true
-    }
+    },
+    empresa: {type: Schema.Types.ObjectId, ref: 'Empresa'}
 },
 { timestamps: { createdAt: 'created_at' , updatedAt: 'updated_at'} });
 

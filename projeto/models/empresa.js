@@ -7,13 +7,21 @@ var EmpresaSchema = new Schema({
         type: String,
         unique: true,
         required: true
-    },nome:{
+    },email:{
+        type: String,
+        index: true,
+        unique: true,
+        required : true
+    }
+    ,nome:{
         type: String,
         required: true
     },
     address:{
-        type: String,
-        required: true
+        rua:{type: String, required: true},
+        cep:{type: String , required: true},
+        bairro:{type: String , required: true},
+        complemento:{type:String}
     }
 },
 { timestamps: { createdAt: 'created_at' , updatedAt: 'updated_at'} });

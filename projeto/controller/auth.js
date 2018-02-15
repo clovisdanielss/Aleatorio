@@ -13,7 +13,8 @@ params.jwtFromRequest= ExtractJwt.fromAuthHeaderAsBearerToken();
 
 module.exports = function() {
     var strategy = new  JwtStrategy(params, function(jwt_payload, done) {
-        userModel.findOne({id: jwt_payload.id}, function(err, user) {
+        console.log(jwt_payload);
+        userModel.findById(jwt_payload.id, function(err, user) {
             if (err) {
                 return done(err, false);
             }
