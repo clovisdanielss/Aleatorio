@@ -25,7 +25,6 @@ router.get("/setup",function(req,res){
 
 
 router.post("/login", function(req, res) {
-    console.log(req.body);
     if(req.body.user && req.body.pass){
         var name = req.body.user;
         var password = req.body.pass;

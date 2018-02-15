@@ -16,7 +16,6 @@ app.use(auth.initialize());//protected
 app.use("/",index);
 app.use("/api/",auth.authenticate(),api);
 
-
 app.listen(3000,()=>{
     console.log('App started port 3000.');
 });

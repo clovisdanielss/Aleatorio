@@ -8,6 +8,9 @@ var UserSchema = new Schema({
         type: String,
         unique: true,
         required: true
+    },nome:{
+        type: String,
+        required: true
     },
     password:{
         type: String,
@@ -17,7 +20,8 @@ var UserSchema = new Schema({
         type: String,
         required: true
     }
-});
+},
+{ timestamps: { createdAt: 'created_at' , updatedAt: 'updated_at'} });
 
 UserSchema.pre('save', function (next) {
     var user = this;
