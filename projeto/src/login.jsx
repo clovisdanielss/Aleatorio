@@ -28,9 +28,12 @@ export default class Login extends React.Component{
             }),
 
         }).then(response=>{
-            console.log(response);
-            if(response.status == 200){
+            return response.json();
+        }).then(data=>{
+            if(data.message === 'ok'){
                 $this.setState({isAuth:true});
+                //localStorage soh usa o contexto da aba atual.
+                localStorage.setItem('token',data.token);
             }
         }).catch(err=>{
             console.log('Erro inesperado');
