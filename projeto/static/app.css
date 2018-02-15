@@ -1,3 +1,7 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
+body{
+    font-family: 'Open Sans', sans-serif!important;
+}
 #meter_needle {
     height: 40%;
     left: 0;

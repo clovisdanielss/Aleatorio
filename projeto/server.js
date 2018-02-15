@@ -1,6 +1,22 @@
-exp = require('express');
-app = new exp();
-app.use(exp.static('static'));
-app.listen(3000, function(err){
-    console.log('escutando em 3000');
-})
+var express = require('express');
+var bodyParser = require('body-parser');
+var auth = require('./controller/auth')();
+var index = require('./controller/index');
+var api = require('./controller/api');
+
+var app = express();
+
+app.use(bodyParser.urlencoded({ extended: false })); 
+app.use(bodyParser.json());
+
+app.use(express.static('static'));
+
+app.use(auth.initialize());//protected
+
+app.use("/",index);
+app.use("/api/",auth.authenticate(),api);
+
+
+app.listen(3000,()=>{
+    console.log('App started port 3000.');
+});
