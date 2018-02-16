@@ -17,7 +17,7 @@ const NavbarItens = (props) => (
                 </NavLink>
             </NavItem>
             <NavItem>
-                <Link className="nav-link" to='/userTable'>
+                <Link className="nav-link" to='/empresaTable'>
                     <Icon.CheckSquare/> Permissões
                 </Link>
             </NavItem>

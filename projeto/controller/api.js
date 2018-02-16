@@ -15,6 +15,7 @@ mongoose.connect(config.database);
 //finalizar operações relacionadas
 //adicionar logger de erro
 //find verificar se user existe
+//adicionar permissões
 
 
 
@@ -78,8 +79,10 @@ router.route('/empresas')
         .post(function(req,res){
             var empresa = new empresaModel(req.body);
             empresa.save(function(err){
-                if(err)
+                if(err){
                     console.log(err);
+                    res.status(401).json({message:'empresa invalid!'})
+                }
                 res.json({message:'empresa created!'});
                 }
             );

@@ -25834,7 +25834,7 @@ var NavbarItens = function NavbarItens(props) {
                 null,
                 _react2.default.createElement(
                     _reactRouterDom.Link,
-                    { className: 'nav-link', to: '/userTable' },
+                    { className: 'nav-link', to: '/empresaTable' },
                     _react2.default.createElement(_reactFontAwesome.Icon.CheckSquare, null),
                     ' Permiss\xF5es'
                 )
@@ -26483,7 +26483,7 @@ var TableRow = function TableRow(props) {
         _react2.default.createElement(
             'td',
             null,
-            props.data.username
+            props.data.nome
         ),
         _react2.default.createElement(
             'td',
@@ -26493,7 +26493,7 @@ var TableRow = function TableRow(props) {
         _react2.default.createElement(
             'td',
             null,
-            props.data.rg
+            props.data.username
         ),
         _react2.default.createElement(
             'td',
@@ -26503,7 +26503,7 @@ var TableRow = function TableRow(props) {
         _react2.default.createElement(
             'td',
             null,
-            props.data.empresa
+            props.data.empresa.nome
         )
     );
 };
@@ -26539,7 +26539,7 @@ function TableList(props) {
                 _react2.default.createElement(
                     'th',
                     null,
-                    'RG'
+                    'Username'
                 ),
                 _react2.default.createElement(
                     'th',
@@ -26561,13 +26561,13 @@ function TableList(props) {
     );
 }
 
-var TablePage = function (_React$Component) {
-    _inherits(TablePage, _React$Component);
+var UserTable = function (_React$Component) {
+    _inherits(UserTable, _React$Component);
 
-    function TablePage() {
-        _classCallCheck(this, TablePage);
+    function UserTable() {
+        _classCallCheck(this, UserTable);
 
-        var _this = _possibleConstructorReturn(this, (TablePage.__proto__ || Object.getPrototypeOf(TablePage)).call(this));
+        var _this = _possibleConstructorReturn(this, (UserTable.__proto__ || Object.getPrototypeOf(UserTable)).call(this));
 
         _this.loadData.bind(_this);
         _this.state = { collection: [] };
@@ -26575,7 +26575,7 @@ var TablePage = function (_React$Component) {
         return _this;
     }
 
-    _createClass(TablePage, [{
+    _createClass(UserTable, [{
         key: 'loadData',
         value: function loadData() {
             var _this2 = this;
@@ -26607,10 +26607,10 @@ var TablePage = function (_React$Component) {
         }
     }]);
 
-    return TablePage;
+    return UserTable;
 }(_react2.default.Component);
 
-exports.default = TablePage;
+exports.default = UserTable;
 
 /***/ }),
 /* 160 */
@@ -43937,6 +43937,10 @@ var _userCreate = __webpack_require__(364);
 
 var _userCreate2 = _interopRequireDefault(_userCreate);
 
+var _empresaTable = __webpack_require__(367);
+
+var _empresaTable2 = _interopRequireDefault(_empresaTable);
+
 var _reactRouterDom = __webpack_require__(61);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -43965,7 +43969,8 @@ var Page = function (_React$Component) {
                 _react2.default.createElement(_topMenu2.default, null),
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/main', component: _container2.default }),
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/userTable', component: _userTable2.default }),
-                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/userCreate', component: _userCreate2.default })
+                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/userCreate', component: _userCreate2.default }),
+                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/empresaTable', component: _empresaTable2.default })
             );
         }
     }]);
@@ -68685,6 +68690,12 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactstrap = __webpack_require__(45);
 
+__webpack_require__(366);
+
+var _jquery = __webpack_require__(105);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -68694,17 +68705,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function NivelPermissoes() {
-    var permissoesArray = ['Admininstrador', 'Gerente', 'Diretor'];
+    var permissoesArray = ['adm', 'ger', 'dir'];
     var permissoesObj = permissoesArray.map(function (nivel) {
         return _react2.default.createElement(
             'option',
-            null,
+            { key: nivel },
             nivel
         );
     });
     return _react2.default.createElement(
         _reactstrap.Input,
-        { id: 'nivel', name: 'nivel', type: 'select', multiple: true },
+        { className: 'custom-select', id: 'nivel', name: 'nivel', type: 'select' },
         permissoesObj
     );
 }
@@ -68715,10 +68726,38 @@ var UserCreate = function (_React$Component) {
     function UserCreate() {
         _classCallCheck(this, UserCreate);
 
-        return _possibleConstructorReturn(this, (UserCreate.__proto__ || Object.getPrototypeOf(UserCreate)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (UserCreate.__proto__ || Object.getPrototypeOf(UserCreate)).call(this));
+
+        _this.submit.bind(_this);
+        return _this;
     }
 
     _createClass(UserCreate, [{
+        key: 'submit',
+        value: function submit(e) {
+            e.preventDefault();
+            fetch('/api/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+                body: JSON.stringify({
+                    'nome': (0, _jquery2.default)('#nome').val(),
+                    'username': (0, _jquery2.default)('#username').val(),
+                    'nivel': (0, _jquery2.default)('#nivel').val(),
+                    'password': (0, _jquery2.default)('#password').val(),
+                    'empresa': '5a86a97c1e04411a5ad2cc43'
+                })
+            }).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                alert(data.message.toUpperCase());
+            }).catch(function (err) {
+                console.log(err);
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             var textCenter = { textAlign: "center" };
@@ -68788,7 +68827,7 @@ var UserCreate = function (_React$Component) {
                                     _react2.default.createElement('br', null),
                                     _react2.default.createElement(
                                         _reactstrap.Button,
-                                        { type: 'submit', color: 'primary', className: 'btn-block m-t-md' },
+                                        { type: 'submit', color: 'primary', className: 'btn-block m-t-md', onClick: this.submit },
                                         'Cadastrar'
                                     )
                                 )
@@ -69421,6 +69460,168 @@ exports.default = Login;
   self.fetch.polyfill = true
 })(typeof self !== 'undefined' ? self : this);
 
+
+/***/ }),
+/* 367 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactstrap = __webpack_require__(45);
+
+var _topMenu = __webpack_require__(151);
+
+var _topMenu2 = _interopRequireDefault(_topMenu);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TableRow = function TableRow(props) {
+    return _react2.default.createElement(
+        'tr',
+        null,
+        _react2.default.createElement(
+            'td',
+            null,
+            props.data._id
+        ),
+        _react2.default.createElement(
+            'td',
+            null,
+            props.data.nome
+        ),
+        _react2.default.createElement(
+            'td',
+            null,
+            props.data.email
+        ),
+        _react2.default.createElement(
+            'td',
+            null,
+            props.data.cnpj
+        ),
+        _react2.default.createElement(
+            'td',
+            null,
+            props.data.address.rua
+        )
+    );
+};
+
+function TableList(props) {
+    var rows = props.collection.map(function (data) {
+        return _react2.default.createElement(TableRow, { data: data, key: data._id });
+    });
+    return _react2.default.createElement(
+        _reactstrap.Table,
+        null,
+        _react2.default.createElement(
+            'thead',
+            null,
+            _react2.default.createElement(
+                'tr',
+                null,
+                _react2.default.createElement(
+                    'th',
+                    null,
+                    '#'
+                ),
+                _react2.default.createElement(
+                    'th',
+                    null,
+                    'Nome'
+                ),
+                _react2.default.createElement(
+                    'th',
+                    null,
+                    'Email'
+                ),
+                _react2.default.createElement(
+                    'th',
+                    null,
+                    'Cnpj'
+                ),
+                _react2.default.createElement(
+                    'th',
+                    null,
+                    'Rua'
+                )
+            )
+        ),
+        _react2.default.createElement(
+            'tbody',
+            null,
+            rows
+        )
+    );
+}
+
+var EmpresaTable = function (_React$Component) {
+    _inherits(EmpresaTable, _React$Component);
+
+    function EmpresaTable() {
+        _classCallCheck(this, EmpresaTable);
+
+        var _this = _possibleConstructorReturn(this, (EmpresaTable.__proto__ || Object.getPrototypeOf(EmpresaTable)).call(this));
+
+        _this.loadData.bind(_this);
+        _this.state = { collection: [] };
+        _this.loadData();
+        return _this;
+    }
+
+    _createClass(EmpresaTable, [{
+        key: 'loadData',
+        value: function loadData() {
+            var _this2 = this;
+
+            //e.preventDefault();
+            fetch('/api/empresas', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                _this2.setState({ collection: data });
+            }).catch(function (err) {
+                console.log(err);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var topMargin = { marginTop: "50px" };
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(TableList, { style: topMargin, collection: this.state.collection })
+            );
+        }
+    }]);
+
+    return EmpresaTable;
+}(_react2.default.Component);
+
+exports.default = EmpresaTable;
 
 /***/ })
 /******/ ]);

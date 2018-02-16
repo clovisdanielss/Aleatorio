@@ -1,15 +1,13 @@
 import React from 'react';
 import {Table,Container as Grid} from 'reactstrap';
 import TopMenu from '../topMenu.jsx';
-
 const TableRow = (props) => (
     <tr>
         <td>{props.data._id}</td>
         <td>{props.data.nome}</td>
-        <td>{props.data.cpf}</td>
-        <td>{props.data.username}</td>
-        <td>{props.data.nivel}</td>
-        <td>{props.data.empresa.nome}</td>
+        <td>{props.data.email}</td>
+        <td>{props.data.cnpj}</td>
+        <td>{props.data.address.rua}</td>
     </tr>
 )
 
@@ -21,10 +19,9 @@ function TableList(props){
                 <tr>
                     <th>#</th>
                     <th>Nome</th>
-                    <th>CPF</th>
-                    <th>Username</th>
-                    <th>Nível</th>
-                    <th>Empresa</th>
+                    <th>Email</th>
+                    <th>Cnpj</th>
+                    <th>Rua</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,7 +32,7 @@ function TableList(props){
 }
 
 
-export default class UserTable extends React.Component{
+export default class EmpresaTable extends React.Component{
     constructor(){
         super();
         this.loadData.bind(this);
@@ -45,7 +42,7 @@ export default class UserTable extends React.Component{
 
     loadData(){
         //e.preventDefault();
-        fetch('/api/users', {
+        fetch('/api/empresas', {
             method:'GET',
             headers:{
                 'Content-Type':'application/json',
