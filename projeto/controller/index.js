@@ -21,7 +21,6 @@ router.get("/setup",function(req,res){
     empresa.address.bairro = "Aldeota";
     empresa.address.complemento = "Sala 913"
     empresa.save(function(err){
-            console.log(empresa);
             var newUser = userModel();
             newUser.username= "admin";
             newUser.nome="Marcos Negreiros"

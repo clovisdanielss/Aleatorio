@@ -5,6 +5,7 @@ var empresaModel = require('../models/empresa');
 var mongoose  = require('mongoose');
 var config = require('../config'); 
 var express = require('express');
+var apiLogger = require('../loggers/apiLogger');
 var router = express.Router();
 
 mongoose.connect(config.database);
@@ -20,13 +21,14 @@ mongoose.connect(config.database);
 
 
 router.get('/', function(req, res) {
+    apiLogger.log('info',"Api logger Running!");
     res.json({ message: 'API Running!' });   
 });
 router.route('/users')
         .post(function(req,res){
             empresaModel.findById(req.body.empresa,function(err,empresa){
                 if(err){
-                    console.log(err);
+                   apiLogger.log('error',err);
                 }
                 if(empresa){
                     var user = new userModel(req.body);
@@ -35,7 +37,7 @@ router.route('/users')
                             console.log(err);
                             res.status(401).json({message:"no possible to create user."});
                         }
-                        res.status(200).json({message:"created user!"});
+                        res.status(201).json({message:"created user!"});
                     });
                 }else res.status(401).json({message:"invalid empresa id"});
             })
