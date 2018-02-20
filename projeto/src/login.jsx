@@ -33,7 +33,6 @@ export default class Login extends React.Component{
             if(data.message === 'ok'){
                 $this.setState({isAuth:true});
                 //localStorage soh usa o contexto da aba atual.
-                
                 localStorage.setItem('token',data.token);
             }
         }).catch(err=>{

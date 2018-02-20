@@ -18,10 +18,39 @@ function NivelPermissoes(){
     );
 }
 
+function ListarEmpresas(props){
+    const empresas = props.empresas.map(empresa=>(<option id={empresa._id} key={empresa._id}>{empresa.nome}</option>))
+    return(
+        <Input className="custom-select" id="empresa" name="empresa" type="select">
+            {empresas}
+        </Input>
+    );
+}
+
 export default class UserCreate extends React.Component{
     constructor(){
         super();
+        this.state = {
+            empresas:[],
+        }
         this.submit.bind(this);
+        this.loadEmpresas();
+    }
+
+    loadEmpresas(){
+        fetch('/api/empresas', {
+            method:'GET',
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':'Bearer '+localStorage.getItem('token'),
+            },
+        }).then(response => {
+            return response.json();
+        }).then(data => {
+            this.setState({empresas:data});
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     submit(e){
@@ -37,7 +66,7 @@ export default class UserCreate extends React.Component{
                 'username':$('#username').val(),
                 'nivel':$('#nivel').val(),
                 'password':$('#password').val(),
-                'empresa':'5a86a97c1e04411a5ad2cc43',
+                'empresa':$('#empresa').children(':selected').attr('id'),
             }),
         }).then(response=>{
             return response.json();
@@ -73,6 +102,10 @@ export default class UserCreate extends React.Component{
                                     <FormGroup>
                                         <Label for="nivel">Nível de Permissão</Label>
                                         <NivelPermissoes/>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="empresas">Empresa</Label>
+                                        <ListarEmpresas empresas={this.state.empresas}/>
                                     </FormGroup>
                                     <br/>
                                     <Button type="submit" color="primary" className="btn-block m-t-md" onClick={this.submit}>

@@ -21458,11 +21458,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function routeCreate() {
+function RouteCreate() {
     localStorage.setItem('route', 'Create');
     localStorage.setItem('title', 'Cadastrar');
 }
-function routeTable() {
+function RouteTable() {
     localStorage.setItem('route', 'Table');
     localStorage.setItem('title', 'Permissões');
 }
@@ -21479,7 +21479,7 @@ var NavbarItens = function NavbarItens(props) {
                 null,
                 _react2.default.createElement(
                     _reactRouterDom.Link,
-                    { className: 'nav-link', to: '/transitionMenu', onClick: routeCreate },
+                    { className: 'nav-link', to: '/transitionMenu', onClick: RouteCreate },
                     _react2.default.createElement(_reactFontAwesome.Icon.UserPlus, null),
                     ' Cadastrar'
                 )
@@ -21499,7 +21499,7 @@ var NavbarItens = function NavbarItens(props) {
                 null,
                 _react2.default.createElement(
                     _reactRouterDom.Link,
-                    { className: 'nav-link', to: '/transitionMenu', onClick: routeTable },
+                    { className: 'nav-link', to: '/transitionMenu', onClick: RouteTable },
                     _react2.default.createElement(_reactFontAwesome.Icon.CheckSquare, null),
                     ' Permiss\xF5es'
                 )
@@ -69206,6 +69206,21 @@ function NivelPermissoes() {
     );
 }
 
+function ListarEmpresas(props) {
+    var empresas = props.empresas.map(function (empresa) {
+        return _react2.default.createElement(
+            'option',
+            { id: empresa._id, key: empresa._id },
+            empresa.nome
+        );
+    });
+    return _react2.default.createElement(
+        _reactstrap.Input,
+        { className: 'custom-select', id: 'empresa', name: 'empresa', type: 'select' },
+        empresas
+    );
+}
+
 var UserCreate = function (_React$Component) {
     _inherits(UserCreate, _React$Component);
 
@@ -69214,11 +69229,34 @@ var UserCreate = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (UserCreate.__proto__ || Object.getPrototypeOf(UserCreate)).call(this));
 
+        _this.state = {
+            empresas: []
+        };
         _this.submit.bind(_this);
+        _this.loadEmpresas();
         return _this;
     }
 
     _createClass(UserCreate, [{
+        key: 'loadEmpresas',
+        value: function loadEmpresas() {
+            var _this2 = this;
+
+            fetch('/api/empresas', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                _this2.setState({ empresas: data });
+            }).catch(function (err) {
+                console.log(err);
+            });
+        }
+    }, {
         key: 'submit',
         value: function submit(e) {
             e.preventDefault();
@@ -69233,7 +69271,7 @@ var UserCreate = function (_React$Component) {
                     'username': (0, _jquery2.default)('#username').val(),
                     'nivel': (0, _jquery2.default)('#nivel').val(),
                     'password': (0, _jquery2.default)('#password').val(),
-                    'empresa': '5a86a97c1e04411a5ad2cc43'
+                    'empresa': (0, _jquery2.default)('#empresa').children(':selected').attr('id')
                 })
             }).then(function (response) {
                 return response.json();
@@ -69309,6 +69347,16 @@ var UserCreate = function (_React$Component) {
                                             'N\xEDvel de Permiss\xE3o'
                                         ),
                                         _react2.default.createElement(NivelPermissoes, null)
+                                    ),
+                                    _react2.default.createElement(
+                                        _reactstrap.FormGroup,
+                                        null,
+                                        _react2.default.createElement(
+                                            _reactstrap.Label,
+                                            { 'for': 'empresas' },
+                                            'Empresa'
+                                        ),
+                                        _react2.default.createElement(ListarEmpresas, { empresas: this.state.empresas })
                                     ),
                                     _react2.default.createElement('br', null),
                                     _react2.default.createElement(
@@ -69917,7 +69965,6 @@ var Login = function (_React$Component) {
                 if (data.message === 'ok') {
                     $this.setState({ isAuth: true });
                     //localStorage soh usa o contexto da aba atual.
-
                     localStorage.setItem('token', data.token);
                 }
             }).catch(function (err) {

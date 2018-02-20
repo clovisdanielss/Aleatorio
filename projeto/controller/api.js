@@ -37,7 +37,7 @@ router.route('/users')
                             apiLogger.log('error','ocorrreu um erro',err);
                             res.status(401).json({message:"no possible to create user."});
                         }
-                        res.status(201).json({message:"created user!"});
+                        else res.status(201).json({message:"created user!"});
                     });
                 }else res.status(401).json({message:"invalid empresa id"});
             })
