@@ -4,21 +4,8 @@ Label,Input, Button} from 'reactstrap'
 import 'whatwg-fetch';
 import $ from 'jquery';
 
-function NivelPermissoes(){
-    const permissoesArray = [
-        'adm',
-        'ger',
-        'dir',
-    ]
-    const permissoesObj = permissoesArray.map(nivel=><option key={nivel}>{nivel}</option>);
-    return(
-        <Input className="custom-select" id="nivel" name="nivel" type="select">
-            {permissoesObj}
-        </Input>
-    );
-}
 
-export default class UserCreate extends React.Component{
+export default class EmpresaCreate extends React.Component{
     constructor(){
         super();
         this.submit.bind(this);
@@ -26,7 +13,7 @@ export default class UserCreate extends React.Component{
 
     submit(e){
         e.preventDefault();
-        fetch('/api/users',{
+        fetch('/api/empresas',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json',
@@ -34,10 +21,14 @@ export default class UserCreate extends React.Component{
             },
             body: JSON.stringify({
                 'nome':$('#nome').val(),
-                'username':$('#username').val(),
-                'nivel':$('#nivel').val(),
-                'password':$('#password').val(),
-                'empresa':'5a86a97c1e04411a5ad2cc43',
+                'cnpj':$('#cnpj').val(),
+                'email':$('#email').val(),
+                'address':{
+                    'rua':$('#rua').val(),
+                    'bairro':$('#bairro').val(),
+                    'cep':$('#cep').val(),
+                    'complemento':$('#complemento').val(),
+                },
             }),
         }).then(response=>{
             return response.json();
@@ -53,27 +44,59 @@ export default class UserCreate extends React.Component{
         return(
             <Grid style={{marginTop:"4.25%", marginBottom:"4.25%"}} >
                 <Row>
-                    <Col lg={6} md={8} sm={10} className="offset-lg-3 offset-md-2 offset-sm-1">
+                    <Col lg={8} md={10} sm={12} className="offset-lg-2 offset-md-1">
                         <Card>
                             <CardBody>
                                 <Form>
-                                    <legend style={textCenter}>Cadastro de Usuário</legend>
-                                    <FormGroup>
-                                        <Label for="nome">Nome</Label>
-                                        <Input id="nome"></Input>
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="username">Nome de Usuário</Label>
-                                        <Input id="username"></Input>
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="password">Senha</Label>
-                                        <Input id="password" type="password"></Input>
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="nivel">Nível de Permissão</Label>
-                                        <NivelPermissoes/>
-                                    </FormGroup>
+                                    <legend style={textCenter}>Cadastro de Empresa</legend>
+                                    <Row>
+                                        <Col lg={6} sm={12}>
+                                            <FormGroup>
+                                                <Label for="nome">Nome</Label>
+                                                <Input id="nome"></Input>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col lg={6} sm={12} xs={12}>
+                                            <FormGroup>
+                                                <Label for="cnpj">CNPJ</Label>
+                                                <Input id="cnpj"></Input>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col lg={6}>
+                                            <FormGroup>
+                                                <Label for="email">Email</Label>
+                                                <Input id="email"></Input>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col lg={6}>
+                                            <FormGroup>
+                                                <Label for="bairro">Bairro</Label>
+                                                <Input id="bairro"></Input>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col lg={3} sm={12} xs={12}>
+                                            <FormGroup>
+                                                <Label for="cep">CEP</Label>
+                                                <Input id="cep"></Input>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col lg={6} sm={12} xs={12}>
+                                            <FormGroup>
+                                                <Label for="rua">Rua</Label>
+                                                <Input id="rua"></Input>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col lg={3} sm={12} xs={12}>
+                                            <FormGroup>
+                                                <Label for="complemento">Complemento</Label>
+                                                <Input id="complemento"></Input>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
                                     <br/>
                                     <Button type="submit" color="primary" className="btn-block m-t-md" onClick={this.submit}>
                                         Cadastrar

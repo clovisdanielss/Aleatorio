@@ -3,11 +3,20 @@ import {Icon} from 'react-font-awesome-5';
 import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import {Link} from 'react-router-dom';
 
+function routeCreate(){
+    localStorage.setItem('route','Create');
+    localStorage.setItem('title','Cadastrar');
+}
+function routeTable(){
+    localStorage.setItem('route','Table');
+    localStorage.setItem('title','Permissões');
+}
+
 const NavbarItens = (props) => (
     <Collapse isOpen={props.isOpen} navbar>
         <Nav className="navbar-nav" navbar>
-            <NavItem>
-                <Link className="nav-link" to='/userCreate'>
+            <NavItem >
+                <Link className="nav-link" to='/transitionMenu' onClick={routeCreate}>
                     <Icon.UserPlus/> Cadastrar
                 </Link>
             </NavItem>
@@ -17,7 +26,7 @@ const NavbarItens = (props) => (
                 </NavLink>
             </NavItem>
             <NavItem>
-                <Link className="nav-link" to='/empresaTable'>
+                <Link className="nav-link" to='/transitionMenu' onClick={routeTable}>
                     <Icon.CheckSquare/> Permissões
                 </Link>
             </NavItem>

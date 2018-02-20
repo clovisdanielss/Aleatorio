@@ -78,6 +78,7 @@ router.route('/empresas')
 
         .post(function(req,res){
             var empresa = new empresaModel(req.body);
+            console.log(empresa);
             empresa.save(function(err){
                 if(err){
                     console.log(err);
