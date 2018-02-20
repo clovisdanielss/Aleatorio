@@ -1,30 +1,41 @@
 import React from 'react';
-import {Table,Container as Grid} from 'reactstrap';
+import {Table,Container as Grid, Button} from 'reactstrap';
+import {Icon} from 'react-font-awesome-5';
 import TopMenu from '../topMenu.jsx';
 
-const TableRow = (props) => (
-    <tr>
+const TableRow = (props) => {
+    function OnDeleteClick(){
+        props.deleteElement(props.data._id);
+    }
+    
+    return(  <tr className="list-group-item-action">
         <td>{props.data._id}</td>
         <td>{props.data.nome}</td>
-        <td>{props.data.cpf}</td>
         <td>{props.data.username}</td>
         <td>{props.data.nivel}</td>
         <td>{props.data.empresa.nome}</td>
+        <td>
+            <Button color="danger" onClick={OnDeleteClick}>
+                <Icon.TrashAlt/>
+            </Button>
+        </td>
     </tr>
 )
+}
 
 function TableList(props){
-    const rows = props.collection.map(data=><TableRow data={data} key={data._id}/>);
+    const rows = props.collection.map(data=>
+    <TableRow data={data} key={data._id} deleteElement={props.deleteElement}/>);
     return(
         <Table>
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Nome</th>
-                    <th>CPF</th>
                     <th>Username</th>
                     <th>Nível</th>
                     <th>Empresa</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,8 +49,12 @@ function TableList(props){
 export default class UserTable extends React.Component{
     constructor(){
         super();
-        this.loadData.bind(this);
+        this.loadData = this.loadData.bind(this);
+        this.deleteElement = this.deleteElement.bind(this);
         this.state = {collection:[]};
+    }
+
+    componentDidMount(){
         this.loadData();
     }
 
@@ -60,11 +75,28 @@ export default class UserTable extends React.Component{
         })
     }
 
+    deleteElement(id){
+        fetch(`/api/users/${id}`,{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':'Bearer '+localStorage.getItem('token'),
+            },
+        }).then(response=>{
+            return response.json();
+        }).then(data=>{
+            alert(data.message.toUpperCase());
+            this.loadData();
+        }).catch(err=>{
+            console.log(err);
+        });
+    }
+
     render(){
         const topMargin = {marginTop:"50px"};
         return(
             <div>
-                <TableList style={topMargin} collection={this.state.collection}/>
+                <TableList deleteElement={this.deleteElement} style={topMargin} collection={this.state.collection}/>
             </div>
         );
     }

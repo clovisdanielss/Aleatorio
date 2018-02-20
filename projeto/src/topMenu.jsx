@@ -71,7 +71,7 @@ export default class TopMenu extends React.Component{
     }
     render(){
         return(
-            <Navbar className="navbar-expand-lg navbar-light bg-light" expand="md">
+            <Navbar className="navbar-expand-lg navbar-light bg-light" expand="lg">
                 {NavbarIcon}
                 <NavbarItens isOpen={this.state.isOpen}/>
                 <NavbarToggler onClick={this.open} className="mr-2"/>

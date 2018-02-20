@@ -21573,7 +21573,7 @@ var TopMenu = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 _reactstrap.Navbar,
-                { className: 'navbar-expand-lg navbar-light bg-light', expand: 'md' },
+                { className: 'navbar-expand-lg navbar-light bg-light', expand: 'lg' },
                 NavbarIcon,
                 _react2.default.createElement(NavbarItens, { isOpen: this.state.isOpen }),
                 _react2.default.createElement(_reactstrap.NavbarToggler, { onClick: this.open, className: 'mr-2' })
@@ -26935,6 +26935,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactstrap = __webpack_require__(24);
 
+var _reactFontAwesome = __webpack_require__(333);
+
 var _topMenu = __webpack_require__(95);
 
 var _topMenu2 = _interopRequireDefault(_topMenu);
@@ -26948,9 +26950,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var TableRow = function TableRow(props) {
+    function OnDeleteClick() {
+        props.deleteElement(props.data._id);
+    }
+
     return _react2.default.createElement(
         'tr',
-        null,
+        { className: 'list-group-item-action' },
         _react2.default.createElement(
             'td',
             null,
@@ -26960,11 +26966,6 @@ var TableRow = function TableRow(props) {
             'td',
             null,
             props.data.nome
-        ),
-        _react2.default.createElement(
-            'td',
-            null,
-            props.data.cpf
         ),
         _react2.default.createElement(
             'td',
@@ -26980,13 +26981,22 @@ var TableRow = function TableRow(props) {
             'td',
             null,
             props.data.empresa.nome
+        ),
+        _react2.default.createElement(
+            'td',
+            null,
+            _react2.default.createElement(
+                _reactstrap.Button,
+                { color: 'danger', onClick: OnDeleteClick },
+                _react2.default.createElement(_reactFontAwesome.Icon.TrashAlt, null)
+            )
         )
     );
 };
 
 function TableList(props) {
     var rows = props.collection.map(function (data) {
-        return _react2.default.createElement(TableRow, { data: data, key: data._id });
+        return _react2.default.createElement(TableRow, { data: data, key: data._id, deleteElement: props.deleteElement });
     });
     return _react2.default.createElement(
         _reactstrap.Table,
@@ -27010,11 +27020,6 @@ function TableList(props) {
                 _react2.default.createElement(
                     'th',
                     null,
-                    'CPF'
-                ),
-                _react2.default.createElement(
-                    'th',
-                    null,
                     'Username'
                 ),
                 _react2.default.createElement(
@@ -27026,6 +27031,11 @@ function TableList(props) {
                     'th',
                     null,
                     'Empresa'
+                ),
+                _react2.default.createElement(
+                    'th',
+                    null,
+                    'Action'
                 )
             )
         ),
@@ -27045,13 +27055,18 @@ var UserTable = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (UserTable.__proto__ || Object.getPrototypeOf(UserTable)).call(this));
 
-        _this.loadData.bind(_this);
+        _this.loadData = _this.loadData.bind(_this);
+        _this.deleteElement = _this.deleteElement.bind(_this);
         _this.state = { collection: [] };
-        _this.loadData();
         return _this;
     }
 
     _createClass(UserTable, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.loadData();
+        }
+    }, {
         key: 'loadData',
         value: function loadData() {
             var _this2 = this;
@@ -27072,13 +27087,33 @@ var UserTable = function (_React$Component) {
             });
         }
     }, {
+        key: 'deleteElement',
+        value: function deleteElement(id) {
+            var _this3 = this;
+
+            fetch('/api/users/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                alert(data.message.toUpperCase());
+                _this3.loadData();
+            }).catch(function (err) {
+                console.log(err);
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             var topMargin = { marginTop: "50px" };
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(TableList, { style: topMargin, collection: this.state.collection })
+                _react2.default.createElement(TableList, { deleteElement: this.deleteElement, style: topMargin, collection: this.state.collection })
             );
         }
     }]);
@@ -69397,6 +69432,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactstrap = __webpack_require__(24);
 
+var _reactFontAwesome = __webpack_require__(333);
+
 var _topMenu = __webpack_require__(95);
 
 var _topMenu2 = _interopRequireDefault(_topMenu);
@@ -69410,9 +69447,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var TableRow = function TableRow(props) {
+    function OnDeleteClick() {
+        props.deleteElement(props.data._id);
+    }
+
     return _react2.default.createElement(
         'tr',
-        null,
+        { className: 'list-group-item-action' },
         _react2.default.createElement(
             'td',
             null,
@@ -69437,13 +69478,22 @@ var TableRow = function TableRow(props) {
             'td',
             null,
             props.data.address.rua
+        ),
+        _react2.default.createElement(
+            'td',
+            null,
+            _react2.default.createElement(
+                _reactstrap.Button,
+                { color: 'danger', onClick: OnDeleteClick },
+                _react2.default.createElement(_reactFontAwesome.Icon.TrashAlt, null)
+            )
         )
     );
 };
 
 function TableList(props) {
     var rows = props.collection.map(function (data) {
-        return _react2.default.createElement(TableRow, { data: data, key: data._id });
+        return _react2.default.createElement(TableRow, { data: data, key: data._id, deleteElement: props.deleteElement });
     });
     return _react2.default.createElement(
         _reactstrap.Table,
@@ -69478,6 +69528,11 @@ function TableList(props) {
                     'th',
                     null,
                     'Rua'
+                ),
+                _react2.default.createElement(
+                    'th',
+                    null,
+                    'Action'
                 )
             )
         ),
@@ -69497,16 +69552,41 @@ var EmpresaTable = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (EmpresaTable.__proto__ || Object.getPrototypeOf(EmpresaTable)).call(this));
 
-        _this.loadData.bind(_this);
+        _this.loadData = _this.loadData.bind(_this);
+        _this.deleteElement = _this.deleteElement.bind(_this);
         _this.state = { collection: [] };
-        _this.loadData();
         return _this;
     }
 
     _createClass(EmpresaTable, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.loadData();
+        }
+    }, {
+        key: 'deleteElement',
+        value: function deleteElement(id) {
+            var _this2 = this;
+
+            fetch('/api/empresas/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                alert(data.message.toUpperCase());
+                _this2.loadData();
+            }).catch(function (err) {
+                console.log(err);
+            });
+        }
+    }, {
         key: 'loadData',
         value: function loadData() {
-            var _this2 = this;
+            var _this3 = this;
 
             //e.preventDefault();
             fetch('/api/empresas', {
@@ -69518,7 +69598,7 @@ var EmpresaTable = function (_React$Component) {
             }).then(function (response) {
                 return response.json();
             }).then(function (data) {
-                _this2.setState({ collection: data });
+                _this3.setState({ collection: data });
             }).catch(function (err) {
                 console.log(err);
             });
@@ -69530,7 +69610,7 @@ var EmpresaTable = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(TableList, { style: topMargin, collection: this.state.collection })
+                _react2.default.createElement(TableList, { deleteElement: this.deleteElement, style: topMargin, collection: this.state.collection })
             );
         }
     }]);

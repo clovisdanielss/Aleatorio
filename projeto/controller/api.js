@@ -75,8 +75,9 @@ router.route('/users/:user_id')
             });
         })
         .delete(function(req, res){
-            userModel.remove({id:req.params.user_id},function(err){
+            userModel.remove({_id:req.params.user_id},function(err){
                 if(err) apiLogger.log('error','ocorrreu um erro',err);
+                else res.status(200).json({message:'deletado com sucesso'});
             });
         });
 
@@ -115,6 +116,7 @@ router.route('/empresas/:empresa_id')
         .delete(function(req, res){
             empresaModel.remove({id:req.params.empresa_id},function(err){
                 if(err) apiLogger.log('error','ocorrreu um erro',err);
+                else res.status(200).json({message:'deletado com sucesso'});
             });
         });
 
