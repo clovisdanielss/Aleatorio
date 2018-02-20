@@ -36,6 +36,7 @@ function TableList(props){
                     <th>Nível</th>
                     <th>Empresa</th>
                     <th>Action</th>
+                    
                 </tr>
             </thead>
             <tbody>
