@@ -1,5 +1,5 @@
 import React from 'react';
-import Animation from './velocimeterAnimation.jsx';
+import Animation from '../Animation/velocimeterAnimation.jsx';
 import {Grid, Col, Row} from 'react-bootstrap';
 import {Card, CardGroup,CardHeader, CardBody, Form, FormGroup, Label, Input, Button} from 'reactstrap';
 
@@ -9,11 +9,12 @@ const topMargin = {marginTop:"50px"};
 export default class Container extends React.Component{
     componentDidMount(){
         Animation();
+
     }
     
     render(){
         return(
-            <Col lg={6} className=" offset-lg-3 " style={topMargin}>
+            <Col lg={6} className=" offset-lg-3 " style={topMargin} id="main-content">
                     <Card className="text-center">
                         <CardHeader>
                             Resumo

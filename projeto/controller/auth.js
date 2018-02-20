@@ -5,6 +5,7 @@ var passport = require("passport");
 var passportJWT = require("passport-jwt");
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
+mongoose.connect(config.database);
 
 var params = {};
 params.secretOrKey = config.secret;

@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Page from './page.jsx';
+import Page from './Main/page.jsx';
+import TablePage from './User/userTable.jsx';
 import {BrowserRouter as Router,Switch, Route, Link} from 'react-router-dom';
 import Login from './login.jsx';
-
+//
 const RouterApp = () =>(
     <Router>
         <div>
             <Route exact path = '/' component={Login}/>
-            <Route  path = '/main' component={Page}/>
+            <Route exact path = '/:foo+' component={Page}/>
         </div>
     </Router>
 );
