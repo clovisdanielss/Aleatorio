@@ -69816,20 +69816,22 @@ var TransitionMenu = function (_React$Component) {
                                     localStorage.getItem('title')
                                 ),
                                 _react2.default.createElement('br', null),
+                                _react2.default.createElement('hr', null),
                                 _react2.default.createElement(
                                     _reactstrap.Button,
                                     { type: 'submit', color: 'primary', className: 'btn-block m-t-md',
                                         onClick: this.routeUser.bind(this) },
                                     'Usu\xE1rios'
                                 ),
-                                _react2.default.createElement('br', null),
-                                _react2.default.createElement('br', null),
+                                _react2.default.createElement('hr', null),
                                 _react2.default.createElement(
                                     _reactstrap.Button,
                                     { type: 'submit', color: 'primary', className: 'btn-block m-t-md',
                                         onClick: this.routeEmpresa.bind(this) },
                                     'Empresas'
-                                )
+                                ),
+                                _react2.default.createElement('hr', null),
+                                _react2.default.createElement('br', null)
                             )
                         )
                     )

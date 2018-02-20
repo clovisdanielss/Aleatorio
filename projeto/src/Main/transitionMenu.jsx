@@ -39,16 +39,18 @@ export default class TransitionMenu extends React.Component{
                         <CardBody>
                         <legend style={textCenter}>{localStorage.getItem('title')}</legend>
                         <br/>
+                        <hr/>
                         <Button type="submit" color="primary" className="btn-block m-t-md" 
                         onClick={this.routeUser.bind(this)}>
                         Usuários
                         </Button>
-                        <br/>
-                        <br/>
+                        <hr/>
                         <Button type="submit" color="primary" className="btn-block m-t-md" 
                         onClick={this.routeEmpresa.bind(this)}>
                         Empresas
                         </Button>
+                        <hr/>
+                        <br/>
                         </CardBody>
                     </Card>
                 </Col>
