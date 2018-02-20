@@ -21,7 +21,6 @@ router.get("/setup",function(req,res){
     empresa.address.bairro = "Aldeota";
     empresa.address.complemento = "Sala 913"
     empresa.save(function(err){
-            console.log(empresa);
             var newUser = userModel();
             newUser.username= "admin";
             newUser.nome="Marcos Negreiros"
@@ -52,7 +51,7 @@ router.post("/login", function(req, res) {
             if (user) {
                 user.comparePassword(password,function(err,isMatch){
                     if(isMatch&!err){
-                        var payload = {id: user.id,nivel: user.nivel};
+                        var payload = {id: user.id,empresa: user.empresa,nivel: user.nivel};
                         var token = jwt.sign(payload, config.secret,{expiresIn:1800});//30 min validate
                         res.json({message: "ok", token: token, id: payload.id, nivel: user.nivel});
                     }else res.status(401).json({message:"passwords did not match."});
