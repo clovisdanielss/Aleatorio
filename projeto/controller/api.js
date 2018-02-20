@@ -13,7 +13,7 @@ mongoose.connect(config.database);
 //finalizar operações relacionadas
 //adicionar permissões
 
-var handleError = function(msg,err){
+var handleError = function(msg,res,err){
     apiLogger.log('erro',msg,err);
     res.status(500).json({message:"problema interno."});
 }
