@@ -33,12 +33,12 @@ router.route('/users')
                     var user = new userModel(req.body);
                     user.save(function(err){
                         if(err){
-                            apiLogger.log('error','ocorrreu um erro',err);
-                            res.status(401).json({message:"no possible to create user."});
+                            apiLogger.log('error','ocorreu um erro',err);
+                            res.status(401).json({message:"não foi possivel encontra usuário."});
                         }
-                        res.status(201).json({message:"created user!"});
+                        res.status(201).json({message:"usuário encontrado."});
                     });
-                }else res.status(401).json({message:"invalid empresa id"});
+                }else res.status(401).json({message:"id de empresa inválido."});
             })
         })
 
@@ -50,13 +50,16 @@ router.route('/users')
                 if(err){
                     apiLogger.log('error','ocorrreu um erro',err);
                 }
-                res.status(200).json(users);
+                if(users){
+                    res.status(200).json(users);
+                }
+                else res.status(404).json({message:'usuários não encontrados'});
             });
         });
 
 router.route('/users/:user_id')
         .put(function(req, res){
-            userModel.findByIdAndUpdate(req.params.user_id,req.body,function(err,user){
+            userModel.findByIdAndUpdate(req.params.user_id,req.body,function(err){
                 if(err)apiLogger.log('error','ocorrreu um erro',err);
                 res.status(200).json({message:"successfull updated."});
             });
@@ -64,18 +67,17 @@ router.route('/users/:user_id')
         .get(function(req, res) {
             userModel.findById(req.params.user_id, function(err, user) {
                 if (err)
-                    apiLogger.log('error','ocorrreu um erro',err);
+                    apiLogger.log('error','ocorreu um erro',err);
                 if(user){
-                    apiLogger.log('debug','usuario resgatado',user);
-                    res.json(user);
+                    res.status(200).json(user);
                 }else{
-                    res.json({message:'user not found.'});
+                    res.status(404).json({message:'user not found.'});
                 }
             });
         })
         .delete(function(req, res){
             userModel.remove({id:req.params.user_id},function(err){
-                if(err) apiLogger.log('error','ocorrreu um erro',err);
+                if(err){apiLogger.log('error','ocorreu um erro',err);}
             });
         });
 
@@ -84,30 +86,40 @@ router.route('/empresas')
         .post(function(req,res){
             var empresa = new empresaModel(req.body);
             empresa.save(function(err){
-                if(err)
+                if(err){
                     apiLogger.log('error','ocorrreu um erro',err);
-                res.json({message:'empresa created!'});
+                    res.status(401).json({message:'empresa invalida.'});
+                }
+                res.status(201).json({message:'empresa created!'});
                 }
             );
         })
 
         .get(function(req,res){
-            empresaModel.find(function(err,users){
+            empresaModel.find(function(err,empresas){
                 if(err)
                     apiLogger.log('error','ocorrreu um erro',err);
-                res.json(users);
+                if(empresas){
+                    res.status(200).json(empresas);
+                }else{
+                    res.status(404).json({message:'empresa não encontrada.'});
+                }
             })
         });
 
 router.route('/empresas/:empresa_id')
         .put(function(req, res){
-            empresaModel.findByIdAndUpdate(req.params.empresa_id,req.body);
+            empresaModel.findByIdAndUpdate(req.params.empresa_id,req.body,function(err){
+                if(err) apiLogger('error','ocorreu um erro',err);
+            });
         })
         .get(function(req, res) {
-            empresaModel.findById(req.params.empresa_id, function(err, user) {
+            empresaModel.findById(req.params.empresa_id, function(err, empresa) {
                 if (err)
                     apiLogger.log('error','ocorrreu um erro',err);
-                res.json(user);
+                if(empresa){
+                    res.status(200).json(empresa);
+                }else res.status(404).json({message:'empresa não encontrada.'})
             });
         })
         .delete(function(req, res){
@@ -118,6 +130,14 @@ router.route('/empresas/:empresa_id')
 
 router.route('/empresas/:empresa_id/users')
         .get(function(req, res) {
-
+            userModel.find({empresa:empresa_id},function(err,users){
+                if(err)
+                    apiLogger.log('error','ocorrreu um erro',err);
+                if(users){
+                    res.status(200).json(users);
+                }else{
+                    res.status(404).json({message:'usuário não encontrado.'});
+                }
+            })
         });
 module.exports = router;
