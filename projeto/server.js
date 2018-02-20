@@ -13,10 +13,10 @@ app.use(express.static('static'));
 
 app.use(auth.initialize());//protected
 
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 
 app.use("/",index);
-app.use("/api/",auth.authenticate(),api);
+app.use("/api/",api);//authenticate
 
 app.listen(3000,()=>{
     console.log('App started port 3000.');
