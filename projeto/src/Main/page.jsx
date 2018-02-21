@@ -7,6 +7,7 @@ import EmpresaTable from '../Empresa/empresaTable.jsx';
 import EmpresaCreate from '../Empresa/empresaCreate.jsx';
 import TransitionMenu from './transitionMenu.jsx';
 import UserEdit from '../User/userEdit.jsx';
+import EmpresaEdit from '../Empresa/empresaEdit.jsx';
 import {BrowserRouter as Router,Switch, Route, Link} from 'react-router-dom';
 
 export default class Page extends React.Component{
@@ -20,6 +21,7 @@ export default class Page extends React.Component{
                 <Route exact path="/userEdit" component={UserEdit}/>
                 <Route exact path="/empresaCreate" component={EmpresaCreate}/>
                 <Route exact path="/empresaTable" component={EmpresaTable}/>
+                <Route exact path="/empresaEdit" component={EmpresaEdit}/>
                 <Route exact path="/transitionMenu" component={TransitionMenu}/>
             </div>
         );

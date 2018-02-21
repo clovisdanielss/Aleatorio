@@ -7,6 +7,10 @@ const TableRow = (props) => {
     function OnDeleteClick(){
         props.deleteElement(props.data._id);
     }
+
+    function OnEditClick(){
+        localStorage.setItem('editId',props.data._id);
+    }
     
     return(  <tr className="list-group-item-action">
         <td>{props.data._id}</td>
@@ -18,9 +22,11 @@ const TableRow = (props) => {
             <Button color="danger" onClick={OnDeleteClick} style={{marginRight:'10px',width:'40px'}}>
                 <Icon.TrashAlt />
             </Button>
-            <Button color="info" style={{width:'40px'}}>
-                <Icon.Edit />
-            </Button>
+            <Link to={'/empresaEdit'} onClick={OnEditClick}>
+                <Button color="info" style={{width:'40px'}}>
+                    <Icon.Edit />
+                </Button>
+            </Link>
         </td>
     </tr>
 )
