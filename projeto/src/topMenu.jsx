@@ -9,7 +9,7 @@ function RouteCreate(){
 }
 function RouteTable(){
     localStorage.setItem('route','Table');
-    localStorage.setItem('title','Permissões');
+    localStorage.setItem('title','Editar');
 }
 
 const NavbarItens = (props) => (
@@ -21,14 +21,14 @@ const NavbarItens = (props) => (
                 </Link>
             </NavItem>
             <NavItem>
-                <NavLink>
+                <Link className="nav-link" to='/transitionMenu' onClick={RouteTable}>
                     <Icon.Edit/> Editar
-                </NavLink>
+                </Link>
             </NavItem>
             <NavItem>
-                <Link className="nav-link" to='/transitionMenu' onClick={RouteTable}>
+                <NavLink>
                     <Icon.CheckSquare/> Permissões
-                </Link>
+                </NavLink>
             </NavItem>
             <NavItem>
                 <NavLink>
@@ -52,10 +52,10 @@ const NavbarItens = (props) => (
 );
 const smallerImage = {maxWidth:"60%", marginTop:"7px"}
 const NavbarIcon = (
-    <NavbarBrand>
+    <Link className="navbar-brand" to='/main'>
             <img className="img-fluid logo" style={smallerImage} src="http://www.graphvs.com.br/sitegraphvs/wp-content/themes/graphvs/images/logo_graphvs.png" alt="">
             </img>
-    </NavbarBrand>
+    </Link>
 );
 
 export default class TopMenu extends React.Component{

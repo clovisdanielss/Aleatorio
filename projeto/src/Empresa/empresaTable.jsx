@@ -1,6 +1,7 @@
 import React from 'react';
 import {Table,Container as Grid, Button} from 'reactstrap';
 import {Icon} from 'react-font-awesome-5';
+import {Link} from 'react-router-dom';
 import TopMenu from '../topMenu.jsx';
 const TableRow = (props) => {
     function OnDeleteClick(){
@@ -14,8 +15,11 @@ const TableRow = (props) => {
         <td>{props.data.cnpj}</td>
         <td>{props.data.address.rua}</td>
         <td>
-            <Button color="danger" onClick={OnDeleteClick}>
-                <Icon.TrashAlt/>
+            <Button color="danger" onClick={OnDeleteClick} style={{marginRight:'10px',width:'40px'}}>
+                <Icon.TrashAlt />
+            </Button>
+            <Button color="info" style={{width:'40px'}}>
+                <Icon.Edit />
             </Button>
         </td>
     </tr>
@@ -29,7 +33,7 @@ function TableList(props){
         <Table>
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>Identificador</th>
                     <th>Nome</th>
                     <th>Email</th>
                     <th>Cnpj</th>

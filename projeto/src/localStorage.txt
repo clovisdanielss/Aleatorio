@@ -1,0 +1,5 @@
+Variaveis usadas na local storage.
+token
+title
+route
+editId

@@ -1,11 +1,16 @@
 import React from 'react';
-import {Table,Container as Grid, Button} from 'reactstrap';
+import {Table,Container as Grid, Button, Col,Row} from 'reactstrap';
 import {Icon} from 'react-font-awesome-5';
 import TopMenu from '../topMenu.jsx';
+import {Link,Redirect} from 'react-router-dom';
 
 const TableRow = (props) => {
     function OnDeleteClick(){
         props.deleteElement(props.data._id);
+    }
+
+    function OnEditClick(){
+        localStorage.setItem('editId',props.data._id);
     }
     
     return(  <tr className="list-group-item-action">
@@ -15,9 +20,14 @@ const TableRow = (props) => {
         <td>{props.data.nivel}</td>
         <td>{props.data.empresa.nome}</td>
         <td>
-            <Button color="danger" onClick={OnDeleteClick}>
-                <Icon.TrashAlt/>
+            <Button color="danger" onClick={OnDeleteClick} style={{marginRight:'10px',width:'40px'}}>
+                <Icon.TrashAlt />
             </Button>
+            <Link to={'/userEdit'} onClick={OnEditClick}>
+                <Button color="info" style={{width:'40px'}}>
+                    <Icon.Edit />
+                </Button>
+            </Link>
         </td>
     </tr>
 )
@@ -30,7 +40,7 @@ function TableList(props){
         <Table>
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>Identificador</th>
                     <th>Nome</th>
                     <th>Username</th>
                     <th>Nível</th>
