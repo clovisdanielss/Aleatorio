@@ -44,7 +44,7 @@ function TableList(props){
                     <th>Email</th>
                     <th>Cnpj</th>
                     <th>Rua</th>
-                    <th>Action</th>
+                    <th>Ação</th>
                 </tr>
             </thead>
             <tbody>

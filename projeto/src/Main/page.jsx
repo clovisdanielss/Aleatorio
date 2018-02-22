@@ -8,7 +8,9 @@ import EmpresaCreate from '../Empresa/empresaCreate.jsx';
 import TransitionMenu from './transitionMenu.jsx';
 import UserEdit from '../User/userEdit.jsx';
 import EmpresaEdit from '../Empresa/empresaEdit.jsx';
+import UserFilter from '../User/userFilter.jsx';
 import {BrowserRouter as Router,Switch, Route, Link} from 'react-router-dom';
+import {Container as Grid} from 'reactstrap';
 
 export default class Page extends React.Component{
     render(){
@@ -16,6 +18,7 @@ export default class Page extends React.Component{
             <div>
                 <TopMenu/>
                 <Route exact path="/main" component={Container}/>
+                <Route exact path="/userTable" component={UserFilter}/>
                 <Route exact path="/userTable" component={UserTable}/>
                 <Route exact path="/userCreate" component={UserCreate}/>
                 <Route exact path="/userEdit" component={UserEdit}/>

@@ -21473,7 +21473,7 @@ var NavbarItens = function NavbarItens(props) {
         { isOpen: props.isOpen, navbar: true },
         _react2.default.createElement(
             _reactstrap.Nav,
-            { className: 'navbar-nav', navbar: true },
+            { className: 'navbar-nav', navbar: true, onClick: props.onOpenClick },
             _react2.default.createElement(
                 _reactstrap.NavItem,
                 null,
@@ -21575,7 +21575,7 @@ var TopMenu = function (_React$Component) {
                 _reactstrap.Navbar,
                 { className: 'navbar-expand-lg navbar-light bg-light', expand: 'lg' },
                 NavbarIcon,
-                _react2.default.createElement(NavbarItens, { isOpen: this.state.isOpen }),
+                _react2.default.createElement(NavbarItens, { onOpenClick: this.open, isOpen: this.state.isOpen }),
                 _react2.default.createElement(_reactstrap.NavbarToggler, { onClick: this.open, className: 'mr-2' })
             );
         }
@@ -27184,7 +27184,7 @@ function TableList(props) {
                 _react2.default.createElement(
                     'th',
                     null,
-                    'Action'
+                    'A\xE7\xE3o'
                 )
             )
         ),
@@ -44617,7 +44617,13 @@ var _empresaEdit = __webpack_require__(370);
 
 var _empresaEdit2 = _interopRequireDefault(_empresaEdit);
 
+var _userFilter = __webpack_require__(372);
+
+var _userFilter2 = _interopRequireDefault(_userFilter);
+
 var _reactRouterDom = __webpack_require__(30);
+
+var _reactstrap = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44644,6 +44650,7 @@ var Page = function (_React$Component) {
                 null,
                 _react2.default.createElement(_topMenu2.default, null),
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/main', component: _container2.default }),
+                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/userTable', component: _userFilter2.default }),
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/userTable', component: _userTable2.default }),
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/userCreate', component: _userCreate2.default }),
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/userEdit', component: _userEdit2.default }),
@@ -69572,7 +69579,7 @@ function TableList(props) {
                 _react2.default.createElement(
                     'th',
                     null,
-                    'Action'
+                    'A\xE7\xE3o'
                 )
             )
         ),
@@ -70624,6 +70631,84 @@ var Login = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Login;
+
+/***/ }),
+/* 372 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactstrap = __webpack_require__(20);
+
+__webpack_require__(39);
+
+var _reactFontAwesome = __webpack_require__(96);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var UserFilter = function (_React$Component) {
+    _inherits(UserFilter, _React$Component);
+
+    function UserFilter() {
+        _classCallCheck(this, UserFilter);
+
+        return _possibleConstructorReturn(this, (UserFilter.__proto__ || Object.getPrototypeOf(UserFilter)).call(this));
+    }
+
+    _createClass(UserFilter, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _reactstrap.Row,
+                { style: { paddingTop: "12px", paddingLeft: "12px" } },
+                _react2.default.createElement(
+                    _reactstrap.Col,
+                    { lg: 6 },
+                    _react2.default.createElement(
+                        _reactstrap.Form,
+                        { inline: true },
+                        _react2.default.createElement(
+                            _reactstrap.FormGroup,
+                            null,
+                            _react2.default.createElement(
+                                _reactstrap.Label,
+                                { 'for': 'nome' },
+                                'Nome'
+                            ),
+                            _react2.default.createElement(_reactstrap.Input, { style: { marginLeft: "10px" }, id: 'nome', type: 'text' })
+                        ),
+                        _react2.default.createElement(
+                            _reactstrap.Button,
+                            { style: { marginLeft: "10px" } },
+                            'Pesquisar'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return UserFilter;
+}(_react2.default.Component);
+
+exports.default = UserFilter;
 
 /***/ })
 /******/ ]);

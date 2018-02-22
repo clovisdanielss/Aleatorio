@@ -45,7 +45,7 @@ function TableList(props){
                     <th>Username</th>
                     <th>Nível</th>
                     <th>Empresa</th>
-                    <th>Action</th>
+                    <th>Ação</th>
                     
                 </tr>
             </thead>
