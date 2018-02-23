@@ -1,36 +1,37 @@
-var winston = require('winston');
-require('winston-loggly-bulk');
+const winston = require('winston');
 
  
 const myCustomLevels={
-    levels:{
-        info:0,
-        debug:1,
-        warn:2,
-        error:3,
-    },
     colors:{
         info: 'blue',
         debug: 'green',
         warn: 'yellow',
         error: 'red'
     }
-}
+};
 
-winston.loggers.add('development',{
-    console:{
-        levels:myCustomLevels,
-        colorize:'true',
-    }
+const alignedWithColorsAndTime = winston.format.combine(
+    winston.format.colorize(),
+    winston.format.timestamp(),
+    winston.format.align(),
+    winston.format.printf((info) => {
+      const {
+        timestamp, level, message, ...args
+      } = info;
+
+      const ts = timestamp.slice(0, 19).replace('T', ' ');
+      return `${ts} [${level}]: ${message} ${Object.keys(args).length ? JSON.stringify(args, null, 2) : ''}`;
+    }),
+  );
+
+const logger = winston.createLogger({
+    format:alignedWithColorsAndTime ,
+    transports: [
+        new winston.transports.Console()
+      ]
 });
+//usar produção
 winston.addColors(myCustomLevels);
 
- winston.add(winston.transports.Loggly, {
-    token: "d701a048-41b9-43c8-b24e-8fffc1cb9258",
-    subdomain: "graphvs",
-    tags: ["Winston-NodeJS"],
-    json:true
-});
 
-
-module.exports=winston;
+module.exports=logger;

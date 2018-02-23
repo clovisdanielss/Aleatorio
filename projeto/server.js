@@ -13,7 +13,7 @@ app.use(express.static('static'));
 
 app.use(auth.initialize());//protected
 
-//app.use(morgan('dev'));
+app.use(morgan('combined'));
 
 app.use("/",index);
 app.use("/api/",api);//authenticate

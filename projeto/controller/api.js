@@ -3,7 +3,7 @@ var empresaModel = require('../models/empresa');
 var mongoose  = require('mongoose');
 var config = require('../config'); 
 var express = require('express');
-var apiLogger = require('../loggers/apiLogger').loggers.get('development');
+var apiLogger = require('../loggers/apiLogger');
 var router = express.Router();
 
 mongoose.connect(config.database);
@@ -12,9 +12,11 @@ mongoose.connect(config.database);
 //verificar numero de conexões mongoose
 //finalizar operações relacionadas
 //adicionar permissões
+//tarbalhar autenticação
+//ajeitar logger
 
 var handleError = function(msg,res,err){
-    apiLogger.log('erro',msg,err);
+    apiLogger.log('error',msg,err);
     res.status(500).json({message:"problema interno."});
 }
 
