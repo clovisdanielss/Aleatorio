@@ -98,7 +98,7 @@ export default class EmpresaCreate extends React.Component{
                                         </Col>
                                     </Row>
                                     <br/>
-                                    <Button type="submit" color="primary" className="btn-block m-t-md" onClick={this.submit}>
+                                    <Button type="submit" color="primary" className="btn-block" onClick={this.submit}>
                                         Cadastrar
                                     </Button>
                                 </Form>

@@ -11,13 +11,13 @@ export default class UserFilter extends React.Component{
     render(){
         return(
         <Row style={{paddingTop:"12px", paddingLeft:"12px"}}>
-            <Col lg={6}>
+            <Col lg={6} xs={12}>
                 <Form inline>
                     <FormGroup>
                         <Label for="nome">Nome</Label>
-                        <Input style={{marginLeft:"10px"}} id="nome" type="text" />
+                        <Input style={{marginLeft:"10px"}}  id="nome" type="text" />
                     </FormGroup>
-                    <Button style={{marginLeft:"10px"}}>Pesquisar</Button>
+                    <Button style={{marginLeft:"10px"}} className="mt-sm-0 mt-3">Pesquisar</Button>
                 </Form>
             </Col>
         </Row>

@@ -61,7 +61,7 @@ export default class Login extends React.Component{
                                         <Input id="pass" type="password"></Input>
                                     </FormGroup>
                                     <br/>
-                                    <Button type="submit" onClick={this.login} color="primary" className="btn-block m-t-md">
+                                    <Button type="submit" onClick={this.login} color="primary" className="btn-block">
                                         Entrar
                                     </Button>
                                 </Form>
