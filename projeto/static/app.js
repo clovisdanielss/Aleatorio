@@ -21607,7 +21607,7 @@ var NavbarItens = function NavbarItens(props) {
         { isOpen: props.isOpen, navbar: true },
         _react2.default.createElement(
             _reactstrap.Nav,
-            { className: 'navbar-nav', navbar: true, onClick: props.onOpenClick },
+            { className: 'navbar-nav', navbar: true },
             _react2.default.createElement(
                 _reactstrap.NavItem,
                 null,
@@ -21709,7 +21709,7 @@ var TopMenu = function (_React$Component) {
                 _reactstrap.Navbar,
                 { className: 'navbar-expand-lg navbar-light bg-light', expand: 'lg' },
                 NavbarIcon,
-                _react2.default.createElement(NavbarItens, { onOpenClick: this.open, isOpen: this.state.isOpen }),
+                _react2.default.createElement(NavbarItens, { isOpen: this.state.isOpen }),
                 _react2.default.createElement(_reactstrap.NavbarToggler, { onClick: this.open, className: 'mr-2' })
             );
         }
@@ -27297,7 +27297,7 @@ var _userTable2 = _interopRequireDefault(_userTable);
 
 var _reactRouterDom = __webpack_require__(30);
 
-var _login = __webpack_require__(373);
+var _login = __webpack_require__(372);
 
 var _login2 = _interopRequireDefault(_login);
 
@@ -69919,6 +69919,8 @@ var _reactstrap = __webpack_require__(17);
 
 var _reactRouterDom = __webpack_require__(30);
 
+var _reactFontAwesome = __webpack_require__(64);
+
 var _jquery = __webpack_require__(25);
 
 var _jquery2 = _interopRequireDefault(_jquery);
@@ -69933,6 +69935,24 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var EntityButton = function EntityButton(props) {
+    return _react2.default.createElement(
+        _reactstrap.Button,
+        { type: 'submit', color: 'primary',
+            onClick: props.function, style: props.style },
+        _react2.default.createElement('img', { src: props.img, height: '75px', width: '75px' }),
+        _react2.default.createElement(
+            _reactstrap.Container,
+            { style: { height: "25px", width: "75px" } },
+            _react2.default.createElement(
+                _reactstrap.Row,
+                { className: 'text-center', style: { display: "block", fontSize: "0.7rem" } },
+                props.text
+            )
+        )
+    );
+};
+
 var TransitionMenu = function (_React$Component) {
     _inherits(TransitionMenu, _React$Component);
 
@@ -69942,6 +69962,8 @@ var TransitionMenu = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (TransitionMenu.__proto__ || Object.getPrototypeOf(TransitionMenu)).call(this));
 
         _this.state = { redirect: false };
+        _this.routeUser = _this.routeUser.bind(_this);
+        _this.routeEmpresa = _this.routeEmpresa.bind(_this);
         return _this;
     }
 
@@ -69968,6 +69990,7 @@ var TransitionMenu = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var myMargin = { marginLeft: "15px", marginTop: "10px" };
             var textCenter = { textAlign: "center" };
             if (this.state.redirect) return _react2.default.createElement(_reactRouterDom.Redirect, { to: localStorage.getItem('route') });
             return _react2.default.createElement(
@@ -69993,19 +70016,14 @@ var TransitionMenu = function (_React$Component) {
                                 _react2.default.createElement('br', null),
                                 _react2.default.createElement('hr', null),
                                 _react2.default.createElement(
-                                    _reactstrap.Button,
-                                    { type: 'submit', color: 'primary', className: 'btn-block',
-                                        onClick: this.routeUser.bind(this) },
-                                    'Usu\xE1rios'
+                                    _reactstrap.Col,
+                                    { className: 'offset-1 offset-sm-0' },
+                                    _react2.default.createElement(EntityButton, { 'function': this.routeUser, img: './users.png', text: 'Usu\xE1rios', style: myMargin }),
+                                    _react2.default.createElement(EntityButton, { 'function': this.routeUser, img: './employee.png', text: 'Empregados', style: myMargin }),
+                                    _react2.default.createElement(EntityButton, { 'function': this.routeEmpresa, img: './empresas.png', text: 'Empresas', style: myMargin }),
+                                    _react2.default.createElement(EntityButton, { 'function': this.routeEmpresa, img: './systems.png', text: 'Sistemas', style: myMargin })
                                 ),
-                                _react2.default.createElement('hr', null),
-                                _react2.default.createElement(
-                                    _reactstrap.Button,
-                                    { type: 'submit', color: 'primary', className: 'btn-block',
-                                        onClick: this.routeEmpresa.bind(this) },
-                                    'Empresas'
-                                ),
-                                _react2.default.createElement('hr', null),
+                                _react2.default.createElement('hr', { style: { marginTop: "26px" } }),
                                 _react2.default.createElement('br', null)
                             )
                         )
@@ -70562,8 +70580,7 @@ var UserFilter = function (_React$Component) {
 exports.default = UserFilter;
 
 /***/ }),
-/* 372 */,
-/* 373 */
+/* 372 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

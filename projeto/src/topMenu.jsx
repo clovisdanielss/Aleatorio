@@ -14,7 +14,7 @@ function RouteTable(){
 
 const NavbarItens = (props) => (
     <Collapse isOpen={props.isOpen} navbar>
-        <Nav className="navbar-nav" navbar onClick={props.onOpenClick}>
+        <Nav className="navbar-nav" navbar>
             <NavItem >
                 <Link className="nav-link" to='/transitionMenu' onClick={RouteCreate}>
                     <Icon.UserPlus/> Cadastrar
@@ -73,7 +73,7 @@ export default class TopMenu extends React.Component{
         return(
             <Navbar className="navbar-expand-lg navbar-light bg-light" expand="lg">
                 {NavbarIcon}
-                <NavbarItens onOpenClick={this.open} isOpen={this.state.isOpen}/>
+                <NavbarItens isOpen={this.state.isOpen}/>
                 <NavbarToggler onClick={this.open} className="mr-2"/>
             </Navbar>
         );
